@@ -46,7 +46,7 @@ run() {
 mapfile -t results < <(
   run "Invalid Content-Type" -X POST "localhost:${PORT}" -H "Content-Type: application/json" -d '{"foo":"bar"}'
   run "Valid Content-Type"   -X POST "localhost:${PORT}" -H "Content-Type: application/text" -d '{"foo":"bar"}'
-  run "OPTIONS /"            -X OPTIONS "localhost:${PORT}"
+  run "OPTIONS"            -X OPTIONS "localhost:${PORT}"
 )
 
 # Format and print the output
