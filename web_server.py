@@ -1,3 +1,4 @@
+import os
 # save as server.py
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -32,7 +33,7 @@ class SimpleHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
 if __name__ == '__main__':
-    port = 8888
+    port = int(os.environ.get('PORT', 8888))
     addr = ('', port)
     print(f"Listening on http://localhost:{port}")
     HTTPServer(addr, SimpleHandler).serve_forever()

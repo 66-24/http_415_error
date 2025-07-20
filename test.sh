@@ -11,7 +11,8 @@ run() {
 
 {
   echo -e "Test\tExit\tOutput"
-  run "Invalid Content-Type" -X POST localhost:8888 -H "Content-Type: application/json" -d '{"foo":"bar"}'
-  run "Valid Content-Type"   -X POST localhost:8888 -H "Content-Type: application/text" -d '{"foo":"bar"}'
-  run "OPTIONS /"            -X OPTIONS localhost:8888
-} | column -t -s $'\t'
+  run "Invalid Content-Type" -X POST "localhost:$PORT" -H "Content-Type: application/json" -d '{"foo":"bar"}'
+  run "Valid Content-Type"   -X POST "localhost:$PORT" -H "Content-Type: application/text" -d '{"foo":"bar"}'
+  run "OPTIONS /"            -X OPTIONS "localhost:$PORT"
+} | column -t -s 
+\t'
