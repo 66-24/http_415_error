@@ -22,3 +22,14 @@ The `web_server.py` script starts a basic HTTP server that listens on port 8888.
     ```bash
     ./test.sh
     ```
+
+## Reproducible Development Environment
+
+This project uses `devenv` to create a reproducible development environment. The `devenv.nix` and `devenv.yaml` files define the required packages and configuration.
+
+To activate the environment, run:
+```bash
+devenv shell
+```
+
+This will install the necessary dependencies, including the correct version of Python, and make them available in your shell.
