@@ -16,13 +16,18 @@ run() {
   printf "%s|%s|%s\n" "$label" "$status" "$output"
 }
 
+formatter="column -t -s '|'"
+if [[ "${1:-}" == "--raw" ]]; then
+  formatter="cat"
+fi
+
 {
   # Use a pipe as a separator for column command
   echo "Test|Exit|Output"
   run "Invalid Content-Type" -X POST "localhost:${PORT}" -H "Content-Type: application/json" -d '{"foo":"bar"}'
   run "Valid Content-Type"   -X POST "localhost:${PORT}" -H "Content-Type: application/text" -d '{"foo":"bar"}'
-  run "OPTIONS /"   /y         -X OPTIONS "localhost:${PORT}"
-} | column -t -s '|'
+  run "OPTIONS /"            -X OPTIONS "localhost:${PORT}"
+} | ${formatter}
 # We use the pipe character '|' as a delimiter for the column command instead of a tab '	'.
 # This is because the output from curl can contain spaces and other characters that might
 # be misinterpreted by the column command when using tabs, leading to formatting issues.
