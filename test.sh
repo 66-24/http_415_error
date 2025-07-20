@@ -32,7 +32,7 @@ run() {
         exit 1
     fi
     jq -n --arg label "$label" --arg status "$status" --arg output "$output" \
-      '{Test: $label, Exit: $status, Output: $output}'
+      '{"Test": $label, "Exit": $status, "Output": $output}'
   else
     # Pipe is the separator for raw and column format
     printf "%s|%s|%s\n" "$label" "$status" "$output"
