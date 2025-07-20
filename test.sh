@@ -31,8 +31,11 @@ run() {
         echo "Error: jq is not installed. Please install it to use --json output." >&2
         exit 1
     fi
-    jq -n --arg label "$label" --arg status "$status" --arg output "$output" \
-      '{"Test": $label, "Exit": $status, "Output": $output}'
+    jq -n \
+      --arg label "$label" \
+      --arg status "$status" \
+      --arg output "$output" \
+      '{Test: $label, Exit: $status, Output: $output}'
   else
     # Pipe is the separator for raw and column format
     printf "%s|%s|%s\n" "$label" "$status" "$output"

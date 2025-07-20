@@ -18,18 +18,28 @@ The `web_server.py` script starts a basic HTTP server that listens on port 8888.
     ```
 
 2.  **Run the tests:**
-    The `test.sh` script sends a few sample requests to the server to demonstrate the expected behavior.
+    The `test.sh` script sends a few sample requests to the server to demonstrate the expected behavior. It supports multiple output formats:
+
+    -   **`./test.sh`**: Default, human-readable table.
+    -   **`./test.sh --raw`**: Raw, pipe-separated output for scripting.
+    -   **`./test.sh --json`**: JSON output for machine consumption.
+
+    ### `gum table` Integration
+
+    There is a known issue with `gum table` in the current environment where it fails to parse valid JSON. As a result, the following command does not work:
+
     ```bash
-    ./test.sh
+    # This command currently fails due to an issue with gum table
+    ./test.sh --json | gum table
     ```
 
 ## Reproducible Development Environment
 
-This project uses `devenv` to create a reproducible development environment. The `devenv.nix` and `devenv.yaml` files define the required packages and configuration.
+This project uses `devenv` to create a reproducible development environment. The `devenv.nix` and `devenv.yaml` files define the required packages and configuration, including `python`, `gum`, and `jq`.
 
 To activate the environment, run:
 ```bash
 devenv shell
 ```
 
-This will install the necessary dependencies, including the correct version of Python, and make them available in your shell.
+This will install the necessary dependencies and make them available in your shell.
